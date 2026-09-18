@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ro"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Plan intensiv – Concurs directori · Cronometru</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--ink:#172033;--muted:#667085;--line:#d9dfeb;--accent:#3157c8;--soft:#eef2ff;--ok:#18864b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+main{max-width:900px;margin:auto;padding:22px}.hero{background:linear-gradient(135deg,#172554,#3157c8);color:white;padding:26px;border-radius:20px}
+.hero h1{margin:0 0 6px;font-size:clamp(24px,5vw,38px)}.hero p{margin:0;opacity:.9}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.stat,.day,.note{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px}.stat{text-align:center}.stat b{display:block;font-size:24px}
+.day{margin:14px 0}.head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.head h2{margin:0;font-size:20px}.sub{color:var(--muted);font-size:14px}
+.progress{height:9px;background:#e8ebf2;border-radius:20px;overflow:hidden;margin:12px 0}.progress i{display:block;height:100%;width:0;background:var(--accent);transition:.2s}
+.task{display:flex;gap:11px;padding:10px 0;border-top:1px solid #eef0f4;align-items:flex-start}.task:first-of-type{border-top:0}.task input{width:21px;height:21px;margin-top:2px;accent-color:var(--accent)}
+.tag{display:inline-block;background:var(--soft);color:#263f91;border-radius:999px;padding:2px 8px;font-size:12px;font-weight:800;margin-right:5px}
+.done{color:var(--ok);font-weight:800}.actions{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}.btn{border:1px solid var(--line);background:white;color:var(--ink);padding:11px 15px;border-radius:12px;font-weight:700;cursor:pointer}
+.note h3{margin-top:0}.note ul{margin-bottom:0;padding-left:20px}
+@media(max-width:560px){main{padding:12px}.stats{grid-template-columns:1fr}.hero{padding:20px}}
+@media print{body{background:#fff}.actions{display:none}.day{break-inside:avoid}main{max-width:none}.hero{color:#000;background:#fff;border:2px solid #000}}
+</style></head><body><main>
+<section class="hero"><h1>Plan intensiv de învățare · 5 zile</h1><p>Concurs directori 2026 · legislație, bibliografie și abilități cognitive</p><div id="countdown" style="margin-top:18px;padding:14px;border-radius:14px;background:rgba(255,255,255,.14);font-weight:800;font-size:clamp(18px,4vw,26px);text-align:center">Se calculează timpul rămas…</div></section>
+<section class="stats"><div class="stat"><b>206</b><span>pagini Lege + ROFUIP</span></div><div class="stat"><b>5</b><span>zile de lucru</span></div><div class="stat"><b id="overall">0%</b><span>progres total</span></div></section>
+<div id="days"></div>
+<section class="note"><h3>Regula de lucru</h3><ul><li><b>Obligatoriu:</b> termene, atribuții, componențe, condiții, interdicții.</li><li><b>Înțeleg:</b> principii, mecanisme și relații între structuri.</li><li><b>Revin:</b> numai la detaliile greșite la itemi.</li></ul></section>
+<div class="actions"><button class="btn" id="print">Tipărește planul</button><button class="btn" id="reset">Debifează tot</button><span class="sub" id="count"></span></div>
+<script>
+const plan=[
+["ZIUA 1","Baza legislativă I",["LEGE|Legea 198/2023 — pag. 1–23","LEGE|Legea 198/2023 — pag. 24–46","ROFUIP|pag. 1–23","COGNITIV|20 itemi: analogii + raționament verbal","FIXARE|30 min: termene, atribuții, cine propune / aprobă / decide"]],
+["ZIUA 2","Baza legislativă II",["LEGE|pag. 47–69","LEGE|pag. 70–92","ROFUIP|pag. 24–46","COGNITIV|20 itemi: raționament numeric + verbal","FIXARE|Reiei exclusiv greșelile din zilele 1–2"]],
+["ZIUA 3","Închiderea legislației",["LEGE|pag. 93–115","LEGE|pag. 116–137","ROFUIP|pag. 47–69","COGNITIV|30 itemi mixt: verbal + numeric + analogii","FIXARE|Test legislativ cumulativ + fișa greșelilor"]],
+["ZIUA 4","Management educațional",["BUSH|Capitolul 1 — citire + schemă concepte","BUSH|Capitolele 2–3 — modele, diferențe, concepte-capcană","PROFIL MANAGER|Profilul profesional al managerului școlar — integral","ITEMI|35–40 itemi Bush + Profil profesional","COGNITIV|30 itemi cu timp: analogii, verbal, numeric, logică/analiză"]],
+["ZIUA 5","Învățare vizibilă + Curriculum + simulare",["HATTIE|Capitolul 9 «Profesorul» — integral","CURRICULUM|Cadrul de referință — Capitolul 10","FIXARE|Hattie: efectele profesorului, feedback, evaluare, impact; Curriculum: conceptele-cheie","COGNITIV|Simulare cronometrată — set mixt complet","FINAL|Revizuiești numai greșelile; fără recitirea integrală"]]
+];
+const host=document.getElementById("days");let saved={};try{saved=JSON.parse(localStorage.getItem("planDirectori5")||"{}")}catch(e){}
+plan.forEach((d,di)=>{const s=document.createElement("section");s.className="day";s.innerHTML='<div class="head"><div><h2>'+d[0]+'</h2><div class="sub">'+d[1]+'</div></div><b id="pct'+di+'">0%</b></div><div class="progress"><i id="bar'+di+'"></i></div>'+d[2].map((t,ti)=>{const [tag,...rest]=t.split("|");const id=di+"-"+ti;return '<label class="task"><input type="checkbox" data-day="'+di+'" data-id="'+id+'" '+(saved[id]?'checked':'')+'><span><span class="tag">'+tag+'</span>'+rest.join("|")+'</span></label>'}).join("");host.appendChild(s)});
+const boxes=[...document.querySelectorAll('input[type="checkbox"]')];
+function update(){let state={};boxes.forEach(b=>state[b.dataset.id]=b.checked);localStorage.setItem("planDirectori5",JSON.stringify(state));for(let d=0;d<5;d++){const a=boxes.filter(x=>+x.dataset.day===d),n=a.filter(x=>x.checked).length,p=Math.round(n/a.length*100);document.getElementById("pct"+d).textContent=p+"%";document.getElementById("bar"+d).style.width=p+"%"}const n=boxes.filter(x=>x.checked).length,p=Math.round(n/boxes.length*100);document.getElementById("overall").textContent=p+"%";document.getElementById("overall").className=n===boxes.length?"done":"";document.getElementById("count").textContent=n+" din "+boxes.length+" activități bifate"}
+boxes.forEach(b=>b.addEventListener("change",update));document.getElementById("reset").addEventListener("click",()=>{if(confirm("Sigur doriți să debifați toate activitățile?")){boxes.forEach(b=>b.checked=false);update()}});document.getElementById("print").addEventListener("click",()=>window.print());update();
+function countdown(){
+ const target=new Date(2026,9,13,0,0,0);
+ const now=new Date(), diff=target-now, el=document.getElementById("countdown");
+ if(diff<=0){el.textContent="13 OCTOMBRIE 2026 · ZIUA PROBEI";return}
+ const days=Math.floor(diff/86400000), hrs=Math.floor((diff%86400000)/3600000), mins=Math.floor((diff%3600000)/60000), secs=Math.floor((diff%60000)/1000);
+ el.innerHTML='<span style="display:block;font-size:13px;font-weight:600;opacity:.85">PÂNĂ LA PROBA 1 · 13 OCTOMBRIE 2026</span>'+days+' zile · '+String(hrs).padStart(2,'0')+' ore · '+String(mins).padStart(2,'0')+' min · '+String(secs).padStart(2,'0')+' sec';
+}
+countdown();setInterval(countdown,1000);
+</script></main></body></html>
