@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ro"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Antrenament Raționament Verbal – Concurs Directori</title>
+<style>
+:root{--bg:#f4f7fb;--card:#fff;--ink:#172033;--muted:#667085;--blue:#2457d6;--green:#16794b;--red:#b42318;--amber:#a15c00;--line:#d9e1ef}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+header{background:linear-gradient(135deg,#173b8f,#2d6cdf);color:#fff;padding:34px 18px}.wrap{max-width:980px;margin:auto}.eyebrow{font-weight:800;letter-spacing:.08em;font-size:.78rem;opacity:.9}
+h1{margin:.3rem 0;font-size:clamp(1.8rem,4vw,3rem)}header p{max-width:760px;margin:.5rem 0 0}
+nav{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}.tab,.btn{border:0;border-radius:12px;padding:11px 16px;font-weight:800;cursor:pointer}.tab{background:#e9effb;color:#24406f}.tab.active{background:var(--blue);color:#fff}
+main{padding:0 18px 50px}.rule{background:#fff8df;border:1px solid #f0d477;border-radius:16px;padding:18px;margin:20px 0}.rule strong{color:#6e4a00}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin:18px 0;box-shadow:0 5px 18px rgba(23,32,51,.05)}
+.badge{display:inline-block;padding:5px 9px;border-radius:999px;background:#edf2ff;color:#234baf;font-size:.78rem;font-weight:800}.new{background:#ecfdf3;color:#087443}
+.text{background:#f8fafc;border-left:4px solid #7a9ce8;padding:16px;border-radius:8px;margin:14px 0}.skeleton{background:#eef7ff;padding:14px;border-radius:12px;margin:12px 0}.q{border-top:1px solid var(--line);padding-top:18px;margin-top:18px}.q h3{font-size:1rem;margin:0 0 10px}
+.answers{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.answer{border:1px solid #bfcbe0;background:white;border-radius:10px;padding:10px;cursor:pointer;font-weight:700}.answer:hover{border-color:var(--blue)}.answer.correct{background:#eaf8f0;border-color:#45a778;color:#0d653e}.answer.wrong{background:#fff0ee;border-color:#e1847b;color:#8d2119}
+.explain{display:none;margin-top:12px;padding:14px;border-radius:12px;background:#f7f8fb}.explain.show{display:block}.trap{font-weight:900;color:var(--red)}.why{margin-top:8px;color:#344054}
+.controls{display:flex;gap:10px;flex-wrap:wrap}.btn{background:var(--blue);color:white}.btn.secondary{background:#e8edf7;color:#263c67}
+#score{font-weight:900}.hidden{display:none!important}.summary{font-size:1.1rem;padding:18px;background:#eef7ff;border-radius:14px;margin:14px 0}
+footer{color:var(--muted);text-align:center;padding:25px;font-size:.88rem}
+@media(max-width:650px){.answers{grid-template-columns:1fr}.card{padding:16px}}
+</style></head>
+<body><header><div class="wrap"><div class="eyebrow">ANTRENAMENT INTERACTIV</div><h1>Raționament verbal</h1><p>Concurs directori și directori adjuncți • Învață să separi ce spune textul de ceea ce presupui tu.</p></div></header>
+<main class="wrap">
+<div class="rule"><strong>REGULA DE AUR:</strong> 1) Textul spune asta? → <b>ADEVĂRAT</b>. 2) Textul spune contrariul? → <b>FALS</b>. 3) Textul nu oferă suficiente date? → <b>NU SE POATE SPUNE</b>.<br><b>Nu folosi cunoștințe din afara fragmentului.</b></div>
+<nav><button class="tab active" data-mode="learn">📘 ÎNVĂȚ</button><button class="tab" data-mode="test">⏱️ MĂ TESTEZ</button><span id="score"></span></nav>
+<div id="intro" class="card"><h2>Metoda în 20 de secunde</h2><p><b>Pasul 1.</b> Redu fragmentul la 3–4 idei certe. <b>Pasul 2.</b> În enunț caută „cuvântul periculos”: <span class="trap">întotdeauna, niciodată, numai, toate, rareori, elimină, direct, obligatoriu</span>. <b>Pasul 3.</b> Compară sensul, nu cuvintele identice. <b>Pasul 4.</b> Dacă enunțul adaugă o informație pe care textul n-o confirmă și nici n-o contrazice, răspunsul este „Nu se poate spune”.</p></div>
+<div id="sets"></div>
+<div id="finish" class="card hidden"><h2>Rezultatul tău</h2><div id="finalScore" class="summary"></div><button class="btn" onclick="resetAll()">Repetă toate exercițiile</button></div>
+</main><footer>Material de antrenament. Primele 3 seturi reproduc subtestul oficial de raționament verbal – proba scrisă, 28 octombrie 2021. Seturile 4–6 sunt exerciții noi de antrenament.</footer>
+<script>
+const sets=[
+{title:"Setul 1 • Echilibrul muncă–familie",official:true,text:`Școlile și universitățile sunt încurajate să ofere angajaților oportunități de muncă flexibile prin intermediul unor strategii de echilibrare a relației muncă-familie, iar profesorii sunt tot mai atrași de instituțiile care practică astfel de strategii. Oportunitatea unui program de lucru flexibil poate reduce conflictul muncă-familie, stresul de la locul de muncă și suprasolicitarea personalului didactic. Totuși, unii dintre directorii de școli ezită în a susține aceste inițiative din cauza costurilor substanțiale implicate, care cresc odată cu numărul de profesori din școală. Pe de altă parte, costurile implementării unor strategii pentru flexibilizarea programului de lucru pot fi compensate prin faptul că se reduce absenteismul și crește angajamentul și motivația profesorilor față de materiile pe care le predau.`,
+sk:["Program flexibil → poate reduce conflictul muncă-familie, stresul și suprasolicitarea.","Unii directori ezită → din cauza costurilor.","Costurile pot fi compensate → absenteism redus + angajament și motivație crescute."],
+qs:[
+{n:7,s:"Eliminarea strategiilor de stabilire a unui echilibru între viața personală și cea profesională ar putea avea ca rezultat reducerea absenteismului.",a:"b",trap:"Eliminarea strategiilor",e:"Textul spune că IMPLEMENTAREA strategiilor poate fi compensată prin REDUCEREA absenteismului. Itemul inversează mecanismul și atribuie reducerea absenteismului ELIMINĂRII strategiilor → FALS."},
+{n:8,s:"O posibilă creștere a motivației profesorilor nu constituie un motiv suficient pentru ca instituțiile de învățământ să implementeze strategii menite să îmbunătățească echilibrul muncă-familie al profesorilor, căci costurile nu pot fi compensate prin nimic.",a:"b",trap:"costurile nu pot fi compensate prin nimic",e:"Contradicție directă: fragmentul afirmă că aceste costuri POT FI COMPENSATE prin reducerea absenteismului și creșterea angajamentului și motivației → FALS."},
+{n:9,s:"Profesorii cu un program de lucru flexibil vor fi mai fericiți în viața de familie comparativ cu cei care nu au un astfel de program.",a:"c",trap:"vor fi mai fericiți",e:"Textul vorbește despre reducerea conflictului muncă-familie, stresului și suprasolicitării. Nu măsoară și nu afirmă «fericirea» profesorilor și nici această comparație între două grupuri → NU SE POATE SPUNE."}
+]},
+{title:"Setul 2 • Viruși informatici",official:true,text:`Experții în utilizarea internetului avertizează cu privire la o mulțime de noi viruși extrem de periculoși care au avut recent efecte devastatoare și care au potențialul de a avaria serios sistemele de calculatoare din școli. Acești viruși se pot reproduce în mii de exemplare în câteva ore și sunt capabili să distrugă sisteme software de securitate, ceea ce le-ar permite apoi hackerilor să preia controlul computerelor din instituțiile de învățământ. Apoi, grupurile infracționale pot stabili conturi bancare utilizând identități furate, pot sabota sistemul computerizat al unei școli și pot cere apoi bani de la acea școală pentru restabilirea acestuia sau pot vinde pe piața neagră informații din computerele cu care au interferat. Atât personalul didactic, cât și elevii sunt adesea sfătuiți să evite accesarea programelor suspecte anexate e-mailurilor și să actualizeze continuu software-ul de securitate cu care este dotat calculatorul.`,
+sk:["Virușii noi → pot avaria calculatoarele școlilor și distruge software de securitate.","Hackerii pot prelua controlul; grupurile infracționale pot fura identități, sabota și cere bani.","Personalul și elevii → sfătuiți să evite programele suspecte și să actualizeze securitatea."],
+qs:[
+{n:10,s:"Utilizatorii de computere și grupurile infracționale sunt amenințați în mod constant de hackeri.",a:"c",trap:"grupurile infracționale / în mod constant",e:"Fragmentul descrie hackerii și grupurile infracționale ca actori ai atacurilor și explică riscurile pentru computere. Nu afirmă că grupurile infracționale sunt ele însele amenințate de hackeri și nici că amenințarea este constantă → NU SE POATE SPUNE."},
+{n:11,s:"Hackerii au nevoie să-și creeze conturi bancare pentru a obține bani prin șantaj de la companiile de software.",a:"c",trap:"au nevoie / companiile de software",e:"Textul spune că grupurile infracționale POT crea conturi folosind identități furate și POT cere bani unei ȘCOLI după sabotaj. Nu spune că hackerii «au nevoie» de conturi pentru șantaj și nici că ținta sunt companiile de software → NU SE POATE SPUNE."},
+{n:12,s:"Experții în utilizarea internetului cred că noul tip de viruși este periculos pentru computere.",a:"a",trap:"periculos pentru computere",e:"Este explicit: experții avertizează asupra unor viruși «extrem de periculoși», cu potențial de a avaria serios sistemele de calculatoare → ADEVĂRAT."}
+]},
+{title:"Setul 3 • Radiația cosmică de fond",official:true,text:`În cadrul unui proiect extracurricular, un elev de liceu vorbește despre radiația cosmică de fond. Aceasta este o reminiscență a Big Bang-ului și, chiar și atât de slabă pe cât este astăzi, această radiație deține informații valoroase despre caracteristicile fundamentale ale universului timpuriu. Micile diferențe, sau anizotropiile, în luminozitatea și polarizarea acestor radiații dezvăluie indicii despre plasma primordială: doar faptul că există aceste discrepanțe arată că plasma nu a fost perfect uniformă. Variațiile observate în luminozitatea radiației reflectă diferențe în densitatea plasmei primordiale, iar polarizarea anizotropă dezvăluie informații despre dinamica universului timpuriu, cum ar fi mișcările materiei și numărul de unde gravitaționale. Cu toate acestea, radiația cosmică de fond nu este singura sursă de microunde polarizate, de aceea polarizarea cosmologică trebuie măsurată la diferite lungimi de undă pentru a o putea izola de semnalele din prim-plan.`,
+sk:["Anizotropiile → arată că plasma primordială nu era perfect uniformă.","Luminozitatea → informații despre densitate; polarizarea → informații despre dinamica universului timpuriu.","Măsurare la lungimi de undă diferite → izolarea polarizării cosmologice de semnalele din prim-plan."],
+qs:[
+{n:13,s:"Lungimile de undă ale semnalelor din prim-plan nu mai sunt luate în considerare odată ce acestea au fost diferențiate de radiația cosmică de fond.",a:"c",trap:"nu mai sunt luate în considerare odată ce",e:"Textul explică de ce se măsoară la lungimi de undă diferite pentru IZOLAREA semnalelor. Nu spune ce se întâmplă ulterior cu lungimile de undă ale semnalelor din prim-plan → NU SE POATE SPUNE."},
+{n:14,s:"Anizotropiile radiației cosmice de fond indică numai că plasma primordială nu era uniformă.",a:"b",trap:"numai",e:"«Numai» face enunțul fals. Textul arată că anizotropiile oferă și informații despre diferențe de densitate, mișcările materiei și undele gravitaționale. Deci nu indică doar lipsa uniformității → FALS."},
+{n:15,s:"Polarizarea radiației cosmice este măsurată pe lungimi de undă diferite pentru a putea separa semnalele de prim-plan de cele de fond.",a:"a",trap:"pentru a putea separa",e:"Este o parafrază directă a ultimei idei: polarizarea cosmologică trebuie măsurată la diferite lungimi de undă pentru a fi izolată de semnalele din prim-plan → ADEVĂRAT."}
+]},
+{title:"Setul 4 • Catalogul electronic",official:false,text:`O școală a introdus catalogul electronic pentru a facilita accesul rapid la informații despre note și absențe. Părinții care și-au activat conturile pot consulta aceste informații fără a aștepta ședințele cu părinții. Conducerea a observat că numărul accesărilor a crescut în primele luni, dar raportul nu stabilește dacă folosirea catalogului electronic a determinat o îmbunătățire a rezultatelor școlare.`,
+sk:["Catalog electronic → acces rapid la note și absențe.","Părinții cu cont activ → pot consulta informațiile fără a aștepta ședințele.","Raportul NU stabilește o cauză între catalog și rezultate școlare."],
+qs:[
+{n:"A",s:"Părinții cu cont activ pot vedea notele și absențele fără să aștepte ședințele cu părinții.",a:"a",trap:"pot vedea",e:"Informația este afirmată explicit → ADEVĂRAT."},
+{n:"B",s:"Catalogul electronic a îmbunătățit în mod sigur rezultatele școlare.",a:"c",trap:"în mod sigur",e:"Raportul spune tocmai că nu stabilește dacă folosirea catalogului a determinat îmbunătățirea rezultatelor. Nu putem confirma sau infirma efectul → NU SE POATE SPUNE."},
+{n:"C",s:"Numărul accesărilor catalogului electronic a scăzut în primele luni.",a:"b",trap:"a scăzut",e:"Textul spune contrariul: numărul accesărilor A CRESCUT → FALS."}
+]},
+{title:"Setul 5 • Feedbackul profesorului",official:false,text:`Într-un program de formare, profesorii au fost încurajați să ofere elevilor feedback specific, orientat spre sarcina de învățare. Observațiile realizate după program au arătat că mulți dintre participanți au folosit mai des acest tip de feedback. Studiul nu a urmărit însă toate clasele și nu a comparat rezultatele cu cele ale profesorilor care nu au participat la program.`,
+sk:["Profesorii → încurajați să ofere feedback specific.","Mulți participanți → l-au folosit mai des.","Nu au fost urmărite toate clasele și nu există comparație cu neparticipanții."],
+qs:[
+{n:"A",s:"Toți profesorii participanți au folosit mai des feedbackul specific.",a:"c",trap:"toți",e:"Textul spune «mulți», nu «toți». Nu știm ce au făcut absolut toți participanții → NU SE POATE SPUNE."},
+{n:"B",s:"Studiul a comparat participanții cu profesorii care nu au urmat programul.",a:"b",trap:"a comparat",e:"Contradicție directă: textul spune că studiul NU a făcut această comparație → FALS."},
+{n:"C",s:"După program, mulți participanți au folosit mai frecvent feedbackul specific.",a:"a",trap:"mulți / mai frecvent",e:"Reproduce exact informația din text → ADEVĂRAT."}
+]},
+{title:"Setul 6 • Activități sportive",official:false,text:`O unitate de învățământ a extins oferta de activități sportive după ore. Elevii pot alege între mai multe discipline, iar participarea este voluntară. În primul semestru, numărul elevilor înscriși la activități sportive a crescut. Datele colectate nu permit însă concluzia că participarea la aceste activități este singura cauză a reducerii absențelor observate în aceeași perioadă.`,
+sk:["Oferta sportivă → extinsă; participarea este voluntară.","Numărul elevilor înscriși → a crescut.","Nu se poate atribui reducerea absențelor exclusiv activităților sportive."],
+qs:[
+{n:"A",s:"Participarea elevilor la activitățile sportive este obligatorie.",a:"b",trap:"obligatorie",e:"Textul spune explicit «participarea este voluntară» → FALS."},
+{n:"B",s:"În primul semestru s-au înscris mai mulți elevi la activitățile sportive.",a:"a",trap:"mai mulți",e:"Este echivalent cu «numărul elevilor înscriși ... a crescut» → ADEVĂRAT."},
+{n:"C",s:"Reducerea absențelor a fost determinată exclusiv de participarea la activitățile sportive.",a:"c",trap:"exclusiv",e:"Datele nu permit concluzia că sportul este singura cauză. Nu putem stabili din fragment cauza exactă → NU SE POATE SPUNE."}
+]}
+]
+let mode="learn", answered=0, correct=0;
+const labels={a:"Adevărat",b:"Fals",c:"Nu se poate spune"};
+function render(){
+ const host=document.getElementById("sets"); host.innerHTML="";
+ sets.forEach((set,si)=>{
+  const el=document.createElement("section"); el.className="card";
+  el.innerHTML=`<span class="badge ${set.official?"":"new"}">${set.official?"SUBIECT OFICIAL • 28.10.2021":"EXERCIȚIU NOU"}</span><h2>${set.title}</h2>
+  <div class="text">${set.text}</div>
+  <div class="skeleton learnOnly"><b>🧠 Scheletul textului:</b><ul>${set.sk.map(x=>"<li>"+x+"</li>").join("")}</ul></div>
+  ${set.qs.map((q,qi)=>`<div class="q" data-key="${si}-${qi}"><h3>Item ${q.n}. ${q.s}</h3><div class="answers">
+   ${["a","b","c"].map(v=>`<button class="answer" onclick="choose(this,'${v}','${q.a}',${si},${qi})">${labels[v]}</button>`).join("")}
+  </div><div class="explain learnOnly" id="ex-${si}-${qi}"><b>🔎 Cuvânt/idee-capcană:</b> <span class="trap">${q.trap}</span><div class="why"><b>De ce?</b> ${q.e}</div><div><b>Răspuns corect: ${labels[q.a]}</b></div></div></div>`).join("")}`;
+  host.appendChild(el);
+ });
+ applyMode();
+}
+function choose(btn,val,ans,si,qi){
+ const q=btn.closest(".q"); if(q.dataset.done)return; q.dataset.done="1"; answered++;
+ q.querySelectorAll(".answer").forEach(b=>b.disabled=true);
+ if(val===ans){btn.classList.add("correct");correct++;} else {btn.classList.add("wrong"); if(mode==="learn") q.querySelectorAll(".answer").forEach(b=>{if(b.textContent===labels[ans])b.classList.add("correct")});}
+ if(mode==="learn") document.getElementById(`ex-${si}-${qi}`).classList.add("show");
+ document.getElementById("score").textContent=`Rezolvate: ${answered}/18 • Corecte: ${correct}`;
+ if(answered===18){document.getElementById("finish").classList.remove("hidden");document.getElementById("finalScore").innerHTML=`Ai obținut <b>${correct}/18</b> răspunsuri corecte (${Math.round(correct/18*100)}%).<br>${correct>=16?"Foarte bine. Repetă în modul TEST pentru automatizarea metodei.":correct>=13?"Bază bună. Reia explicațiile itemilor greșiți și urmărește cuvintele-capcană.":"Reia modul ÎNVĂȚ și aplică de fiecare dată cele 3 întrebări: confirmă? contrazice? informație insuficientă?"}`;}
+}
+function applyMode(){document.querySelectorAll(".learnOnly").forEach(x=>x.classList.toggle("hidden",mode==="test"))}
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{mode=t.dataset.mode;document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===t));resetAll();});
+function resetAll(){answered=0;correct=0;document.getElementById("score").textContent="";document.getElementById("finish").classList.add("hidden");render();window.scrollTo({top:0,behavior:"smooth"})}
+render();
+</script></body></html>
