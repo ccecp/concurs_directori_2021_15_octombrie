@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ro"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Antrenament Raționament Verbal – Concurs Directori</title>
+<style>
+:root{--bg:#f4f7fb;--card:#fff;--ink:#172033;--muted:#667085;--blue:#2457d6;--green:#16794b;--red:#b42318;--amber:#a15c00;--line:#d9e1ef}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
+header{background:linear-gradient(135deg,#173b8f,#2d6cdf);color:#fff;padding:34px 18px}.wrap{max-width:980px;margin:auto}.eyebrow{font-weight:800;letter-spacing:.08em;font-size:.78rem;opacity:.9}
+h1{margin:.3rem 0;font-size:clamp(1.8rem,4vw,3rem)}header p{max-width:760px;margin:.5rem 0 0}
+nav{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}.tab,.btn{border:0;border-radius:12px;padding:11px 16px;font-weight:800;cursor:pointer}.tab{background:#e9effb;color:#24406f}.tab.active{background:var(--blue);color:#fff}
+main{padding:0 18px 50px}.rule{background:#fff8df;border:1px solid #f0d477;border-radius:16px;padding:18px;margin:20px 0}.rule strong{color:#6e4a00}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px;margin:18px 0;box-shadow:0 5px 18px rgba(23,32,51,.05)}
+.badge{display:inline-block;padding:5px 9px;border-radius:999px;background:#edf2ff;color:#234baf;font-size:.78rem;font-weight:800}.new{background:#ecfdf3;color:#087443}
+.text{background:#f8fafc;border-left:4px solid #7a9ce8;padding:16px;border-radius:8px;margin:14px 0}.skeleton{background:#eef7ff;padding:14px;border-radius:12px;margin:12px 0}.q{border-top:1px solid var(--line);padding-top:18px;margin-top:18px}.q h3{font-size:1rem;margin:0 0 10px}
+.answers{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.answer{border:1px solid #bfcbe0;background:white;border-radius:10px;padding:10px;cursor:pointer;font-weight:700}.answer:hover{border-color:var(--blue)}.answer.correct{background:#eaf8f0;border-color:#45a778;color:#0d653e}.answer.wrong{background:#fff0ee;border-color:#e1847b;color:#8d2119}
+.explain{display:none;margin-top:12px;padding:14px;border-radius:12px;background:#f7f8fb}.explain.show{display:block}.trap{font-weight:900;color:var(--red)}.why{margin-top:8px;color:#344054}
+.controls{display:flex;gap:10px;flex-wrap:wrap}.btn{background:var(--blue);color:white}.btn.secondary{background:#e8edf7;color:#263c67}
+#score{font-weight:900}.hidden{display:none!important}.summary{font-size:1.1rem;padding:18px;background:#eef7ff;border-radius:14px;margin:14px 0}
+footer{color:var(--muted);text-align:center;padding:25px;font-size:.88rem}
+@media(max-width:650px){.answers{grid-template-columns:1fr}.card{padding:16px}}
+</style></head>
+<body><header><div class="wrap"><div class="eyebrow">ANTRENAMENT INTERACTIV</div><h1>Raționament verbal</h1><p>Concurs directori și directori adjuncți • Învață să separi ce spune textul de ceea ce presupui tu.</p></div></header>
+<main class="wrap">
+<div class="rule"><strong>REGULA DE AUR:</strong> 1) Textul spune asta? → <b>ADEVĂRAT</b>. 2) Textul spune contrariul? → <b>FALS</b>. 3) Textul nu oferă suficiente date? → <b>NU SE POATE SPUNE</b>.<br><b>Nu folosi cunoștințe din afara fragmentului.</b></div>
+<nav><button class="tab active" data-mode="learn">📘 ÎNVĂȚ</button><button class="tab" data-mode="test">⏱️ MĂ TESTEZ</button><span id="score"></span></nav>
+<div id="intro" class="card"><h2>Metoda în 20 de secunde</h2><p><b>Pasul 1.</b> Redu fragmentul la 3–4 idei certe. <b>Pasul 2.</b> În enunț caută „cuvântul periculos”: <span class="trap">întotdeauna, niciodată, numai, toate, rareori, elimină, direct, obligatoriu</span>. <b>Pasul 3.</b> Compară sensul, nu cuvintele identice. <b>Pasul 4.</b> Dacă enunțul adaugă o informație pe care textul n-o confirmă și nici n-o contrazice, răspunsul este „Nu se poate spune”.</p></div>
+<div id="sets"></div>
+<div id="finish" class="card hidden"><h2>Rezultatul tău</h2><div id="finalScore" class="summary"></div><button class="btn" onclick="resetAll()">Repetă toate exercițiile</button></div>
+</main><footer>Material de antrenament. Primele 3 seturi reproduc subtestul oficial de raționament verbal – proba scrisă, 15 octombrie 2021. Seturile 4–6 sunt exerciții noi de antrenament.</footer>
+<script>
+const sets=[
+{title:"Setul 1 • Fabricarea sticlei",official:true,text:`În urma unui atelier din cadrul zilelor „Școala Altfel”, elevii învață despre progresele semnificative făcute în construirea și operarea furnalelor de sticlărie, în dezvoltarea compoziției sticlei și în procesul de fabricare și modelare a acesteia. De exemplu, modelarea termodinamică aduce o contribuție semnificativă la îmbunătățirea compoziției sticlei, permite control asupra caracteristicilor de devitrificare, studiază modelarea arzătoarelor pentru a asigura faptul că flăcările au luminozitate maximă și că unghiul de contact al acestora cu sticla este potrivit și ajută la minimizarea consumului de combustibil. Exploatarea rezultatelor unor cercetări atât de avansate permite producătorilor de sticlă să își reducă mult cheltuielile pentru carburant, să minimizeze procentul defectelor și să producă sticlă de cea mai înaltă calitate, toate acestea fiind foarte importante dacă doresc să își mențină stabilitatea comercială și fidelitatea clienților.`,
+sk:["Modelarea termodinamică → îmbunătățește compoziția și controlează devitrificarea.","Arzătoare → luminozitate maximă + unghi de contact potrivit + minimizarea combustibilului.","Cercetarea → costuri mai mici + mai puține defecte + sticlă de calitate înaltă."],
+qs:[
+{n:7,s:"Este produsă sticlă de calitate mai înaltă atunci când cuptorul este încins la temperatură maximă.",a:"c",trap:"temperatură maximă",e:"Textul vorbește despre luminozitatea maximă a flăcărilor, nu despre temperatura maximă a cuptorului. Enunțul introduce o condiție nouă. Nu avem nici confirmare, nici contradicție → NU SE POATE SPUNE."},
+{n:8,s:"Strălucirea flăcărilor cuptorului nu are un impact direct asupra consumului de combustibil utilizat în procesul de fabricare a sticlei.",a:"b",trap:"nu are un impact direct",e:"Conform șablonului oficial, răspunsul este FALS. Fragmentul leagă modelarea arzătoarelor, luminozitatea maximă și unghiul potrivit de obiectivul minimizării consumului. Enunțul neagă această legătură. Observație utilă: formularea „direct” face itemul mai subtil; la concurs urmărim cheia oficială și relația construită în fragment."},
+{n:9,s:"Dacă se procedează în așa fel încât flăcările să intre în contact cu sticla într-un anumit unghi, se poate reduce cantitatea de energie consumată în procesul de fabricare a sticlei.",a:"a",trap:"anumit unghi / se poate reduce",e:"Este o parafrază: „unghiul de contact ... potrivit” corespunde ideii de contact într-un anumit unghi, iar „minimizarea consumului de combustibil” corespunde reducerii energiei consumate. Nu căuta cuvinte identice; caută același sens → ADEVĂRAT."}
+]},
+{title:"Setul 2 • Psihoterapia",official:true,text:`Studii relevante afirmă tot mai des că psihoterapia este o formă eficientă de tratare a tulburărilor de comportament în școli, în ciuda unor opinii frecvente care susțin că eficiența psihoterapiei s-a dovedit aproape inexistentă în cadrul unui număr de alte tulburări grave. Mai mult, studiile au evidențiat că psihoterapia, în combinație cu mediul de sprijin potrivit, poate avea rezultate mai bune decât un mediu care oferă sprijin, dar în lipsa psihoterapiei. Aceasta îi încurajează pe profesioniștii din domeniul sănătății mintale să ia în considerare psihoterapia atunci când stabilesc tratamentul unui elev cu tulburări de comportament.`,
+sk:["Psihoterapia → eficientă pentru tulburările de comportament în școli.","Psihoterapie + sprijin → POATE avea rezultate mai bune decât sprijinul singur.","Profesioniștii sunt încurajați să ia în considerare psihoterapia."],
+qs:[
+{n:10,s:"Studiile arată că psihoterapia poate trata eficient tulburările de comportament ale elevilor.",a:"a",trap:"poate trata eficient",e:"Prima propoziție afirmă tocmai eficiența psihoterapiei pentru tulburările de comportament în școli. Enunțul reformulează aceeași idee → ADEVĂRAT."},
+{n:11,s:"Dacă psihoterapia nu este ajutată de un mediu care oferă sprijin, eficiența tratamentului pentru diferite tipuri de tulburări de comportament se reduce întotdeauna.",a:"c",trap:"întotdeauna",e:"Textul spune că asocierea cu sprijinul POATE avea rezultate mai bune. Nu spune că lipsa sprijinului reduce ÎNTOTDEAUNA eficiența. „Poate” nu devine „întotdeauna” → NU SE POATE SPUNE."},
+{n:12,s:"Dacă nu este combinat cu psihoterapia, un mediu care oferă sprijin este rareori eficient în tratamentul tulburărilor de comportament ale elevilor.",a:"c",trap:"rareori",e:"Textul compară două variante, dar nu spune cât de des este eficient sprijinul singur. „Rareori” introduce o frecvență absentă din fragment → NU SE POATE SPUNE."}
+]},
+{title:"Setul 3 • Podurile și cutremurele",official:true,text:`În cadrul orelor de fizică, elevii observă cum, prin progresul rapid al tehnologiei din ziua de azi, podurile sunt din ce în ce mai sofisticate și se întind pe distanțe mult mai mari. Totuși, cutremurele rămân o potențială amenințare pentru aceste structuri imense, deoarece ele pot produce daune ireparabile și costisitoare unor poduri importante. Dat fiind că structura de susținere este una dintre vulnerabilitățile majore ale unui pod în fața mișcărilor tectonice, suspensia auto-ancorată pentru poduri pare a fi o soluție promițătoare. Acest model de pod face ca rezistența cablurilor să compenseze greutatea punții, eliminând astfel nevoia de puncte de ancorare pentru sprijin.`,
+sk:["Podurile → tot mai sofisticate și pe distanțe mai mari.","Cutremurele RĂMÂN o amenințare.","Suspensia auto-ancorată → soluție promițătoare.","Cablurile compensează greutatea punții → elimină nevoia punctelor de ancorare."],
+qs:[
+{n:13,s:"Podurile moderne au caracteristici structurale diferite de cele construite înaintea dezvoltării tehnologiei de astăzi.",a:"c",trap:"diferite de cele construite înainte",e:"Fragmentul spune că podurile actuale sunt mai sofisticate și se întind pe distanțe mai mari, dar nu descrie explicit caracteristicile structurale ale podurilor construite înainte. Comparația cerută depășește informația oferită → NU SE POATE SPUNE."},
+{n:14,s:"Nivelul ridicat de sofisticare al podurilor din ziua de azi elimină riscurile implicate de cutremure.",a:"b",trap:"elimină",e:"Contradicție directă: enunțul spune „elimină”, fragmentul spune că „cutremurele rămân o potențială amenințare”. Când textul spune contrariul → FALS."},
+{n:15,s:"O posibilă soluție privind riscurile implicate de cutremure sunt podurile cu suspensie auto-ancorată, în care rezistența cablurilor se ajută de punctele de ancorare pentru sprijin.",a:"b",trap:"se ajută de punctele de ancorare",e:"Prima parte este corectă, dar finalul inversează informația decisivă: textul spune că modelul ELIMINĂ nevoia de puncte de ancorare. O singură contradicție esențială face întregul enunț FALS."}
+]},
+{title:"Setul 4 • Învățarea digitală",official:false,text:`O școală a introdus o platformă digitală pentru exerciții suplimentare. Profesorii pot folosi platforma la clasă sau o pot recomanda pentru activitatea individuală. În primul semestru, elevii care au utilizat-o constant au finalizat mai multe exerciții decât cei care au folosit-o ocazional. Raportul școlii precizează însă că datele nu permit stabilirea faptului că platforma, singură, a determinat rezultatele mai bune.`,
+sk:["Platforma → poate fi folosită la clasă sau individual.","Utilizare constantă → asociată cu mai multe exerciții finalizate.","Raportul NU demonstrează că platforma singură a cauzat rezultatele."],
+qs:[
+{n:"A",s:"Elevii care au utilizat constant platforma au finalizat mai multe exerciții decât cei care au utilizat-o ocazional.",a:"a",trap:"au finalizat mai multe",e:"Este afirmat explicit în fragment → ADEVĂRAT."},
+{n:"B",s:"Platforma digitală este singura cauză a rezultatelor mai bune ale elevilor.",a:"b",trap:"singura cauză",e:"Textul spune explicit că datele NU permit stabilirea faptului că platforma, singură, a determinat rezultatele. Enunțul afirmă exact ceea ce textul refuză să concluzioneze → FALS."},
+{n:"C",s:"Toți profesorii au folosit platforma în fiecare lecție.",a:"c",trap:"toți / fiecare",e:"Fragmentul spune doar că profesorii POT folosi platforma. Nu precizează câți au folosit-o și nici frecvența → NU SE POATE SPUNE."}
+]},
+{title:"Setul 5 • Program de lectură",official:false,text:`Într-un program de lectură, elevii au avut acces săptămânal la biblioteca școlii și au putut alege cărți din mai multe domenii. După trei luni, numărul mediu de cărți împrumutate a crescut. Coordonatorii au observat și o participare mai mare la discuțiile despre lectură, dar nu au măsurat dacă rezultatele elevilor la toate disciplinele s-au modificat.`,
+sk:["Acces săptămânal + alegere din mai multe domenii.","Media cărților împrumutate → a crescut.","Participarea la discuții → a crescut.","Rezultatele la toate disciplinele → NU au fost măsurate."],
+qs:[
+{n:"A",s:"După trei luni, elevii au împrumutat în medie mai multe cărți.",a:"a",trap:"în medie mai multe",e:"Este aceeași informație ca „numărul mediu de cărți împrumutate a crescut” → ADEVĂRAT."},
+{n:"B",s:"Programul de lectură a îmbunătățit rezultatele elevilor la toate disciplinele.",a:"c",trap:"toate disciplinele",e:"Rezultatele la toate disciplinele nu au fost măsurate. Nu putem afirma nici că s-au îmbunătățit, nici că nu s-au îmbunătățit → NU SE POATE SPUNE."},
+{n:"C",s:"Participarea elevilor la discuțiile despre lectură a scăzut.",a:"b",trap:"a scăzut",e:"Textul spune contrariul: a fost observată „o participare mai mare” → FALS."}
+]},
+{title:"Setul 6 • Formarea profesorilor",official:false,text:`Într-un proiect de formare, profesorii pot participa la ateliere lunare despre feedback și evaluare. Participarea la fiecare atelier nu este obligatorie. La finalul proiectului, majoritatea profesorilor care au participat la cel puțin patru ateliere au declarat că folosesc mai frecvent feedbackul individualizat. Raportul nu compară însă aceste declarații cu practicile profesorilor care nu au participat la ateliere.`,
+sk:["Ateliere lunare → participarea NU este obligatorie.","Majoritatea celor cu minimum 4 ateliere → declară folosirea mai frecventă a feedbackului individualizat.","Nu există comparație cu neparticipanții."],
+qs:[
+{n:"A",s:"Profesorii sunt obligați să participe la toate atelierele lunare.",a:"b",trap:"obligați / toate",e:"Contradicție directă: fragmentul precizează că participarea la fiecare atelier NU este obligatorie → FALS."},
+{n:"B",s:"Majoritatea profesorilor care au participat la cel puțin patru ateliere au declarat că folosesc mai frecvent feedbackul individualizat.",a:"a",trap:"majoritatea / cel puțin patru",e:"Enunțul reproduce exact informația din fragment → ADEVĂRAT."},
+{n:"C",s:"Profesorii care nu au participat la ateliere folosesc feedbackul individualizat mai rar decât participanții.",a:"c",trap:"mai rar decât participanții",e:"Raportul nu face această comparație. Faptul că participanții declară o schimbare nu ne spune cum lucrează neparticipanții → NU SE POATE SPUNE."}
+]}];
+let mode="learn", answered=0, correct=0;
+const labels={a:"Adevărat",b:"Fals",c:"Nu se poate spune"};
+function render(){
+ const host=document.getElementById("sets"); host.innerHTML="";
+ sets.forEach((set,si)=>{
+  const el=document.createElement("section"); el.className="card";
+  el.innerHTML=`<span class="badge ${set.official?"":"new"}">${set.official?"SUBIECT OFICIAL • 15.10.2021":"EXERCIȚIU NOU"}</span><h2>${set.title}</h2>
+  <div class="text">${set.text}</div>
+  <div class="skeleton learnOnly"><b>🧠 Scheletul textului:</b><ul>${set.sk.map(x=>"<li>"+x+"</li>").join("")}</ul></div>
+  ${set.qs.map((q,qi)=>`<div class="q" data-key="${si}-${qi}"><h3>Item ${q.n}. ${q.s}</h3><div class="answers">
+   ${["a","b","c"].map(v=>`<button class="answer" onclick="choose(this,'${v}','${q.a}',${si},${qi})">${labels[v]}</button>`).join("")}
+  </div><div class="explain learnOnly" id="ex-${si}-${qi}"><b>🔎 Cuvânt/idee-capcană:</b> <span class="trap">${q.trap}</span><div class="why"><b>De ce?</b> ${q.e}</div><div><b>Răspuns corect: ${labels[q.a]}</b></div></div></div>`).join("")}`;
+  host.appendChild(el);
+ });
+ applyMode();
+}
+function choose(btn,val,ans,si,qi){
+ const q=btn.closest(".q"); if(q.dataset.done)return; q.dataset.done="1"; answered++;
+ q.querySelectorAll(".answer").forEach(b=>b.disabled=true);
+ if(val===ans){btn.classList.add("correct");correct++;} else {btn.classList.add("wrong"); if(mode==="learn") q.querySelectorAll(".answer").forEach(b=>{if(b.textContent===labels[ans])b.classList.add("correct")});}
+ if(mode==="learn") document.getElementById(`ex-${si}-${qi}`).classList.add("show");
+ document.getElementById("score").textContent=`Rezolvate: ${answered}/18 • Corecte: ${correct}`;
+ if(answered===18){document.getElementById("finish").classList.remove("hidden");document.getElementById("finalScore").innerHTML=`Ai obținut <b>${correct}/18</b> răspunsuri corecte (${Math.round(correct/18*100)}%).<br>${correct>=16?"Foarte bine. Repetă în modul TEST pentru automatizarea metodei.":correct>=13?"Bază bună. Reia explicațiile itemilor greșiți și urmărește cuvintele-capcană.":"Reia modul ÎNVĂȚ și aplică de fiecare dată cele 3 întrebări: confirmă? contrazice? informație insuficientă?"}`;}
+}
+function applyMode(){document.querySelectorAll(".learnOnly").forEach(x=>x.classList.toggle("hidden",mode==="test"))}
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{mode=t.dataset.mode;document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x===t));resetAll();});
+function resetAll(){answered=0;correct=0;document.getElementById("score").textContent="";document.getElementById("finish").classList.add("hidden");render();window.scrollTo({top:0,behavior:"smooth"})}
+render();
+</script></body></html>
